@@ -1,0 +1,3 @@
+C:/Users/Dawid/CLionProjects/TSP/cmake-build-release/CMakeFiles/TSP.dir
+C:/Users/Dawid/CLionProjects/TSP/cmake-build-release/CMakeFiles/edit_cache.dir
+C:/Users/Dawid/CLionProjects/TSP/cmake-build-release/CMakeFiles/rebuild_cache.dir

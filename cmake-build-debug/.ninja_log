@@ -1,0 +1,7 @@
+# ninja log v6
+6	495	7511403943164538	CMakeFiles/TSP.dir/main.cpp.obj	7c94fbaf6385306
+518	666	7511403948279178	TSP.exe	43ef8ed21bddd7a6
+2	279	7511502680333660	build.ninja	3361457b40f66dfe
+22	364	7501832041729268	CMakeFiles/TSP.dir/TSPDistanceCalculator.cpp.obj	93b3caf62a523258
+18	517	7511403943284650	CMakeFiles/TSP.dir/MatrixGenerator.cpp.obj	260a3e428240bace
+21	443	7501952245629881	CMakeFiles/TSP.dir/TSPBrute.cpp.obj	48d3688e95400f6d
