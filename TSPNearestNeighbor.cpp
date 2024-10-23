@@ -1,5 +1,5 @@
 #include "TSPNearestNeighbor.h"
-#include <climits> // For INT_MAX
+#include <climits>
 #include <vector>
 
 using namespace std;
@@ -54,7 +54,7 @@ pair<int, vector<int>> TSPNearestNeighbor::findNearestNeighborRoute() {
             totalDistance += dist[currentCity][startCity]; // Dodawanie dystansu z powrotem do miasta startowego
             route.push_back(startCity);                   // Dokończenie cyklu przez wrócenie na początek
         } else {
-            totalDistance = INT_MAX; // Invalid route
+            totalDistance = INT_MAX; // Obsługa wyjątku
         }
 
         // Aktualizacja najlepszej ścieżki oraz dystansu

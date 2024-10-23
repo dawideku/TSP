@@ -18,14 +18,14 @@ int TSPBrute::calculateDistance(const vector<int>& route) {
     for (int i = 0; i < n - 1; i++) {
         int from = route[i];
         int to = route[i + 1];
-        if (dist[from][to] == -1) return INT_MAX; // Handle invalid paths
+        if (dist[from][to] == -1) return INT_MAX; // Obsługa wyjątku
         totalDistance += dist[from][to];
     }
 
-    // Add the distance to return to the starting city
+    // Zapewnienie powrotu do miasta początkowego
     int start = route[0];
     int end = route[n - 1];
-    if (dist[end][start] == -1) return INT_MAX; // Handle invalid paths
+    if (dist[end][start] == -1) return INT_MAX; // Obsługa wyjątku
     totalDistance += dist[end][start];
 
     return totalDistance;
@@ -50,7 +50,7 @@ pair<int, vector<int>> TSPBrute::findBestRoute() {
             minDistance = currentDistance;
             bestRoute = cities; // Zapisywanie najlepszej ścieżki
         }
-    } while (next_permutation(cities.begin() + 1, cities.end())); // Za każdym razem startujemy od miasta 0
+    } while (next_permutation(cities.begin(), cities.end())); // Za każdym razem startujemy od miasta 0
 
     return {minDistance, bestRoute};
 }

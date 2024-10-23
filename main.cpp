@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>   // For file I/O
+#include <chrono>
 #include <climits>   // For INT_MAX
 #include "TSPBrute.h"           // Include the TSPBrute class
 #include "TSPNearestNeighbor.h"  // Include the TSPNearestNeighbor class
@@ -93,7 +94,11 @@ int main() {
                 if (dist.empty()) {
                     cout << "No matrix generated yet! Please generate one first." << endl;
                 } else {
+                    auto start = chrono::steady_clock::now();
                     auto [minDistance, bestRoute] = bruteCalculator.findBestRoute();
+                    auto end = chrono::steady_clock::now();
+                    auto czas_wykonania = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+                    cout << "Czas wykonania funkcji: " << czas_wykonania << " ms" << endl;
                     cout << "Minimum Distance (Brute Force): " << minDistance << endl;
                     cout << "Best Route: ";
                     for (int city : bestRoute) {

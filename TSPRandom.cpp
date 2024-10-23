@@ -1,18 +1,18 @@
 #include "TSPRandom.h"
-#include <algorithm> // For shuffle
-#include <climits>   // For INT_MAX
-#include <cstdlib>   // For rand and srand
-#include <ctime>     // For time
+#include <algorithm>
+#include <climits>
+#include <cstdlib>
+#include <ctime>
 #include <random>
 
-// Constructor to initialize the distance matrix and number of attempts
+// Inicjalizacja klasy dla macierzy oraz liczby iteracji (10000)
 TSPRandom::TSPRandom(const vector<vector<int>>& distanceMatrix, int numAttempts) {
     dist = distanceMatrix;
     attempts = numAttempts;
-    srand(static_cast<unsigned>(time(0))); // Seed for random number generation
+    srand(static_cast<unsigned>(time(0))); // Ziarno dla generatora
 }
 
-// Method to calculate the total distance for a given route
+// Metoda obliczająca długość scieżki dla podanej ścieżki
 int TSPRandom::calculateDistance(const vector<int>& route) {
     int totalDistance = 0;
     int n = route.size();
@@ -21,25 +21,25 @@ int TSPRandom::calculateDistance(const vector<int>& route) {
     for (int i = 0; i < n - 1; i++) {
         int from = route[i];
         int to = route[i + 1];
-        if (dist[from][to] == -1) return INT_MAX; // Handle invalid paths
+        if (dist[from][to] == -1) return INT_MAX; // Obsługa wyjątku
         totalDistance += dist[from][to];
     }
 
-    // Add the distance to return to the starting city
+    // Zapewnienie powrotu do miasta początkowego
     int start = route[0];
     int end = route[n - 1];
-    if (dist[end][start] == -1) return INT_MAX; // Handle invalid paths
+    if (dist[end][start] == -1) return INT_MAX; // Obsługa wyjątku
     totalDistance += dist[end][start];
 
     return totalDistance;
 }
 
-// Method to find the best random route and minimum distance
+// Metoda szukająca najlepszą ścieżkę i jej koszt
 pair<int, vector<int>> TSPRandom::findBestRandomRoute() {
     int n = dist.size();
     vector<int> cities(n);
 
-    // Initialize the cities vector (e.g., {0, 1, 2, ..., n-1})
+    // Inicjalizacja wektora miast (0,1,2,3,4,5..., n-1)
     for (int i = 0; i < n; i++) {
         cities[i] = i;
     }
@@ -47,15 +47,15 @@ pair<int, vector<int>> TSPRandom::findBestRandomRoute() {
     int bestDistance = INT_MAX;
     vector<int> bestRoute;
 
-    // Try 'attempts' number of random routes
+    // Wykonanie algorytmu n razy (w tym przypadku 10000)
     for (int attempt = 0; attempt < attempts; attempt++) {
-        // Shuffle the cities to create a random route
-        shuffle(cities.begin() + 1, cities.end(), std::mt19937(std::random_device()())); // Keep the first city fixed
+        // Losowe mieszanie miast
+        shuffle(cities.begin(), cities.end(), std::mt19937(std::random_device()())); // Keep the first city fixed
 
-        // Calculate the distance for the current random route
+        // Obliczenie ścieżki
         int currentDistance = calculateDistance(cities);
 
-        // Check if the current route is the best one so far
+        // Sprawdzenie czy ścieżka jest mniejsza i ewentualna podmiana
         if (currentDistance < bestDistance) {
             bestDistance = currentDistance;
             bestRoute = cities;

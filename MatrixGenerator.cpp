@@ -1,25 +1,25 @@
 #include "MatrixGenerator.h"
-#include <cstdlib> // For rand() and srand()
-#include <ctime>   // For time()
-#include <iostream> // For std::cout
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 
 using namespace std;
 
-// Method to generate a random asymmetric distance matrix of size n x n
+// Metoda generująca asymetryczną macierz
 vector<vector<int>> MatrixGenerator::generateMatrixAsym(int n) {
-    vector<vector<int>> dist(n, vector<int>(n, -1)); // Initialize matrix with -1
+    vector<vector<int>> dist(n, vector<int>(n, -1)); // Wypełnienie macierzy wartościami -1
 
-    // Seed random number generator
+    // Ziarno do generatora
     srand(static_cast<unsigned>(time(0)));
 
-    // Fill the matrix with random distances, ensuring asymmetry (dist[i][j] != dist[j][i])
+    // Wypełnienie macierzy losowymi wartosciami
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             if (i != j) {
-                int randomDistance = rand() % 100 + 1; // Random distance between 1 and 100
+                int randomDistance = rand() % 100 + 1;
                 dist[i][j] = randomDistance;
 
-                // To make it asymmetric, ensure dist[j][i] is different
+                // Zapewnienie własności asymetryczności
                 int asymmetricDistance = rand() % 100 + 1;
                 dist[j][i] = (dist[j][i] == -1) ? asymmetricDistance : dist[j][i];
             }
@@ -29,26 +29,26 @@ vector<vector<int>> MatrixGenerator::generateMatrixAsym(int n) {
     return dist;
 }
 
-// Method to generate a random symmetric distance matrix of size n x n
+// Metoda tworząca symetryczną macierz
 vector<vector<int>> MatrixGenerator::generateMatrixSym(int n) {
-    vector<vector<int>> dist(n, vector<int>(n, -1)); // Initialize matrix with -1
+    vector<vector<int>> dist(n, vector<int>(n, -1)); // Wypełnienie macierzy wartościami -1
 
-    // Seed random number generator
+    // Ziarno dla generatora
     srand(static_cast<unsigned>(time(0)));
 
-    // Fill the matrix with random symmetric distances (dist[i][j] == dist[j][i])
+    // Wypełnienie macierzy losowymi wartościami
     for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) { // Only fill upper triangle and mirror to lower triangle
-            int randomDistance = rand() % 100 + 1; // Random distance between 1 and 100
+        for (int j = i + 1; j < n; j++) { // Wypełnienie tylko górnego "trójkąta"
+            int randomDistance = rand() % 100 + 1;
             dist[i][j] = randomDistance;
-            dist[j][i] = randomDistance; // Symmetric distance
+            dist[j][i] = randomDistance; // Zapewnienie symetryczności
         }
     }
 
     return dist;
 }
 
-// Method to display the distance matrix
+// Metoda wyświetlająca macierz
 void MatrixGenerator::showMatrix(const vector<vector<int>>& dist) {
     cout << "Generated Distance Matrix:" << endl;
     for (const auto& row : dist) {
